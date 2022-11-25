@@ -4,7 +4,6 @@ import { useLoaderData, defer, Await } from 'react-router-dom'
 import Posts from '../components/Posts'
 import { getSlowPosts } from '../util/api'
 
-
 function DeferredBlogPostsPage() {
     const loaderData = useLoaderData();
 
@@ -16,13 +15,13 @@ function DeferredBlogPostsPage() {
                     {(loadedPosts) => <Posts blogPosts={loadedPosts} />}
                 </Await>
             </Suspense>
-            {/* <Posts blogPosts={loaderData}></Posts> */}
         </>
     )
 }
 
 export default DeferredBlogPostsPage;
 
+// If you want to wait until the whole component is rendered before showing the page, use 'await' before the getSlowPosts. 
 export async function loader() {
     return defer({ posts: getSlowPosts() });
 }
