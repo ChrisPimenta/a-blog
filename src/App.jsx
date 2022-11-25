@@ -7,12 +7,14 @@ import PostDetailPage, { postDetailPageLoader } from './pages/PostDetail';
 import RootLayout from './pages/RootLayout';
 import WelcomePage from './pages/Welcome';
 import ErrorPage from './pages/Error';
+import DeferredBlogPostsPage, { loader as deferredBlogPostsLoader } from './pages/DeferredBlogPosts';
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<RootLayout />} errorElement={<ErrorPage />}>
     <Route index path="/" element={<WelcomePage />} />
     <Route path="/blog" element={<BlogLayout />}>
-      <Route index element={<BlogPostsPage />} loader={blogPostsLoader} />
+      {/* <Route index element={<BlogPostsPage />} loader={blogPostsLoader} /> */}
+      <Route index element={<DeferredBlogPostsPage />} loader={deferredBlogPostsLoader} />
       <Route path=":id" element={<PostDetailPage />} loader={postDetailPageLoader} />
     </Route>
     <Route path="/blog/new" element={<NewPostPage />} action={newPostAction} />
