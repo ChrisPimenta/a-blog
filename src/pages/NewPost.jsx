@@ -1,4 +1,4 @@
-import { redirect, useNavigate } from 'react-router-dom';
+import { redirect, useNavigate, useActionData, useNavigation } from 'react-router-dom';
 
 import NewPostForm from '../components/NewPostForm';
 import { savePost } from '../util/api';
@@ -6,6 +6,10 @@ import { savePost } from '../util/api';
 function NewPostPage() {
 
   const navigate = useNavigate();
+  const actionData = useActionData();
+
+  // Used to get navigation state (so for HTTP requests can use submitting for isLoading)
+  const navigation = useNavigation();
 
   function cancelHandler() {
     navigate('/blog');
@@ -13,9 +17,10 @@ function NewPostPage() {
 
   return (
     <>
+      {actionData && actionData.status && <p>{actionData.message}</p>}
       <NewPostForm
         onCancel={cancelHandler}
-        submitting={false}
+        submitting={navigation.state === 'submitting'}
       />
     </>
   );
