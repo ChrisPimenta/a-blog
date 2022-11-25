@@ -2,7 +2,7 @@ import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } 
 
 import BlogLayout from './pages/BlogLayout';
 import BlogPostsPage, { blogPostsLoader } from './pages/BlogPosts';
-import NewPostPage from './pages/NewPost';
+import NewPostPage, { newPostAction } from './pages/NewPost';
 import PostDetailPage, { postDetailPageLoader } from './pages/PostDetail';
 import RootLayout from './pages/RootLayout';
 import WelcomePage from './pages/Welcome';
@@ -15,7 +15,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route index element={<BlogPostsPage />} loader={blogPostsLoader} />
       <Route path=":id" element={<PostDetailPage />} loader={postDetailPageLoader} />
     </Route>
-    <Route path="/blog/new" element={<NewPostPage />} />
+    <Route path="/blog/new" element={<NewPostPage />} action={newPostAction} />
   </Route>
 ))
 
